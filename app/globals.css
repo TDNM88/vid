@@ -1,0 +1,527 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 160 84% 39%;
+    --primary-foreground: 355.7 100% 97.3%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 160 84% 96%;
+    --accent-foreground: 160 84% 39%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 160 84% 39%;
+
+    --radius: 1rem;
+  }
+
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 0 0% 95%;
+
+    --card: 24 9.8% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 160 84% 39%;
+    --primary-foreground: 144.9 80.4% 10%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 160 84% 39%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-image: radial-gradient(at 100% 0%, hsla(160, 84%, 95%, 0.4) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(160, 84%, 95%, 0.4) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply tracking-tight;
+  }
+
+  @media (max-width: 640px) {
+    :root {
+      --radius: 0.75rem;
+    }
+  }
+}
+
+/* Modern Glass Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025), inset 0 0 0 1px
+    rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.01), inset 0 0 0 1px
+    rgba(255, 255, 255, 0.2);
+}
+
+/* Gradient Heading */
+.gradient-heading {
+  font-weight: 700;
+  background: linear-gradient(135deg, hsl(160, 84%, 39%) 0%, hsl(174, 84%, 39%) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  letter-spacing: -0.02em;
+}
+
+/* Animations */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Step Indicator */
+.steps-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  position: relative;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
+
+.steps-container::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  left: 2.5rem;
+  right: 2.5rem;
+  height: 2px;
+  background-color: #e2e8f0;
+  z-index: 0;
+}
+
+@media (max-width: 640px) {
+  .steps-container::before {
+    left: 1.5rem;
+    right: 1.5rem;
+  }
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.step-circle {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background-color: white;
+  border: 2px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.step-item.active .step-circle {
+  background-color: hsl(160, 84%, 39%);
+  border-color: hsl(160, 84%, 39%);
+  color: white;
+  box-shadow: 0 0 0 4px rgba(0, 200, 150, 0.2);
+  transform: scale(1.1);
+}
+
+.step-item.complete .step-circle {
+  background-color: hsl(160, 84%, 39%);
+  border-color: hsl(160, 84%, 39%);
+  color: white;
+}
+
+.step-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b;
+  transition: all 0.3s ease;
+  text-align: center;
+  max-width: 80px;
+}
+
+.step-item.active .step-text {
+  color: hsl(160, 84%, 39%);
+  font-weight: 600;
+}
+
+.step-item.complete .step-text {
+  color: hsl(160, 84%, 39%);
+}
+
+@media (max-width: 640px) {
+  .step-text {
+    font-size: 0.75rem;
+    max-width: 60px;
+  }
+
+  .step-circle {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+/* Progress Bar */
+.progress-bar {
+  position: absolute;
+  top: 1rem;
+  left: 2.5rem;
+  height: 2px;
+  background-color: hsl(160, 84%, 39%);
+  z-index: 0;
+  transition: width 0.5s ease;
+}
+
+@media (max-width: 640px) {
+  .progress-bar {
+    left: 1.5rem;
+  }
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Card Hover Effect */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Gradient Button */
+.btn-gradient {
+  background: linear-gradient(135deg, hsl(160, 84%, 39%) 0%, hsl(174, 84%, 39%) 100%);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-gradient::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, hsl(160, 84%, 35%) 0%, hsl(174, 84%, 35%) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-gradient:hover::after {
+  opacity: 1;
+}
+
+.btn-gradient span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-gradient:hover {
+  box-shadow: 0 4px 14px 0 rgba(0, 200, 150, 0.39);
+}
+
+/* Outline Button */
+.btn-outline {
+  background: transparent;
+  border: 2px solid hsl(160, 84%, 39%);
+  color: hsl(160, 84%, 39%);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-outline::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 200, 150, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-outline:hover::after {
+  opacity: 1;
+}
+
+.btn-outline span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Image Container */
+.image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.image-container img {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.image-container:hover img {
+  transform: scale(1.05);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.image-container:hover .image-overlay {
+  opacity: 1;
+}
+
+/* Neumorphic Elements */
+.neumorphic {
+  background: #f0f4f8;
+  box-shadow: 8px 8px 16px rgba(174, 174, 192, 0.4), -8px -8px 16px rgba(255, 255, 255, 0.8);
+  border-radius: 1rem;
+}
+
+.neumorphic-inset {
+  background: #f0f4f8;
+  box-shadow: inset 8px 8px 16px rgba(174, 174, 192, 0.4), inset -8px -8px 16px rgba(255, 255, 255, 0.8);
+  border-radius: 1rem;
+}
+
+/* Form Elements */
+.input-focus-ring {
+  transition: all 0.2s ease;
+}
+
+.input-focus-ring:focus {
+  box-shadow: 0 0 0 2px rgba(0, 200, 150, 0.3);
+}
+
+/* Responsive Typography */
+@media (max-width: 640px) {
+  .responsive-text-xl {
+    font-size: 1.5rem;
+  }
+
+  .responsive-text-lg {
+    font-size: 1.25rem;
+  }
+
+  .responsive-text-base {
+    font-size: 1rem;
+  }
+
+  .responsive-text-sm {
+    font-size: 0.875rem;
+  }
+}
+
+/* Decorative Elements */
+.decorative-dots {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-image: radial-gradient(circle, rgba(0, 200, 150, 0.2) 1px, transparent 1px);
+  background-size: 20px 20px;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.decorative-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(0, 200, 150, 0.1) 0%, rgba(0, 200, 150, 0.05) 100%);
+  z-index: -1;
+}
+
+/* Intro Screen Specific Styles */
+.intro-slide {
+  transition: all 0.5s ease;
+}
+
+.intro-progress-dot {
+  transition: all 0.3s ease;
+}
+
+.intro-feature-card {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.intro-feature-card:hover {
+  border-color: rgba(0, 200, 150, 0.3);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Accordion Custom Styles */
+.custom-accordion-item {
+  border-radius: 0.75rem;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.custom-accordion-item:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.custom-accordion-trigger {
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  font-weight: 500;
+}
+
+.custom-accordion-content {
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Tabs Custom Styles */
+.custom-tabs-list {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 0.75rem;
+  padding: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.custom-tab {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.custom-tab[data-state="active"] {
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
